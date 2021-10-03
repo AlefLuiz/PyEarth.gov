@@ -1,0 +1,227 @@
+#:import C kivy.utils.get_color_from_hex
+#:set Base C("#363636")     #Cinza      - Background
+#:set Base_1 C("#FFFFFF")   #Branco     - Letras
+#:set Base_2 C("#38D1D6")   #Ciano      - Botões
+#:set Base_3 C("#6b6b6b")   #CinzaClaro - Fundo do campo de texto  
+
+<ScreenManagement>:
+    TelaDeInicio:
+    TelaDeLogin:
+    TelaDeRegistro:
+    TelaDeRegDigital
+
+<TelaDeInicio>
+    MDBoxLayout:
+        md_bg_color: Base
+        AnchorLayout:
+            anchor: 'center'
+            MDBoxLayout:
+                adaptive_size: True
+                orientation:"vertical"
+                MDBoxLayout:
+                    adaptive_height: True
+                    Image:
+                        source: 'resources/Logo.png'
+                MDBoxLayout:
+                    adaptive_height: True
+                    Image:
+                        source: 'resources/PyEarth.gov.png'
+                MDLabel:
+                    text: ""
+                    id: msgError
+                    halign: "center"
+                    theme_text_color: "Error"
+                MDBoxLayout:
+                    adaptive_size: True
+                    orientation:"horizontal"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    Botao:
+                        text: "Login"
+                        on_press:root.login()
+                    Espaco:
+                    Botao:
+                        text: "Register"
+                        on_press:root.register()
+                    Espaco:
+                    Botao:
+                        text: "Reg Digital (Teste)"
+                        on_press:root.regfinger()           
+
+<TelaDeRegDigital>
+    MDBoxLayout:
+        md_bg_color: Base
+        orientation:'vertical'
+        AnchorLayout:
+            anchor_x:'left' 
+            anchor_y:'top'
+            Botao:
+                text: "<-"
+                on_press: root.back()
+            AnchorLayout:
+                anchor: 'center'
+                MDBoxLayout:
+                    adaptive_size: True
+                    orientation:"vertical"
+                    MDBoxLayout:
+                        adaptive_height: True
+                        Image:
+                            source: 'resources/Logo.png'
+                    Espaco:
+                    MDLabel:
+                        text: ""
+                        id: msgError
+                        halign: "center"
+                        theme_text_color: "Error"
+                    Espaco:
+                    CampoDeTexto:
+                        id:digital_name
+                        hint_text: "Digital Name"
+                    Espaco:
+                    CampoDeTexto:
+                        id:fingerprint
+                        hint_text: "Fingerprint"
+                    Espaco:
+                    MDBoxLayout:
+                        adaptive_size: True
+                        orientation:"horizontal"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        Espaco:
+                        Botao:
+                            text: "Import"         
+                            on_press: root.import_digital()
+                            pos_hint: {"center_y": .5}
+                        Espaco:
+                        Botao:
+                            text: "Register"         
+                            on_press: root.register_digital()
+                            pos_hint: {"center_y": .5}  
+
+<TelaDeLogin>:
+    MDBoxLayout:
+        md_bg_color: Base
+        orientation:'vertical'
+        AnchorLayout:
+            anchor_x:'left' 
+            anchor_y:'top'
+            Botao:
+                text: "<-"
+                on_press: root.back()
+            AnchorLayout:
+                anchor: 'center'
+                MDBoxLayout:
+                    adaptive_size: True
+                    orientation:"vertical"
+                    MDBoxLayout:
+                        adaptive_height: True
+                        Image:
+                            source: 'resources/Logo.png'
+                    Espaco:
+                    MDLabel:
+                        text: ""
+                        id: msgError
+                        halign: "center"
+                        theme_text_color: "Error"
+                    Espaco:
+                    CampoDeTexto:
+                        id:login
+                        hint_text: "Login"
+                    Espaco:
+                    CampoDeTexto:
+                        id:password
+                        password:True
+                        hint_text: "Password"
+                    Espaco:
+                    MDBoxLayout:
+                        adaptive_size: True
+                        orientation:"horizontal"
+                        pos_hint: {"center_x": .5, "center_y": .5}
+                        Botao:
+                            text: "Login"
+                            on_press:root.login()
+                        Espaco:
+                        Botao:
+                            text: "Register"
+                            on_press:root.register()             
+
+<TelaDeRegistro>:
+    MDBoxLayout:
+        md_bg_color: Base
+        orientation:'vertical'
+        AnchorLayout:
+            anchor_x:'left' 
+            anchor_y:'top'
+            Botao:
+                text: "<-"
+                on_press: root.back()
+        AnchorLayout:
+            anchor:'center'
+            BoxLayout:
+                size_hint:None,None
+                width:388
+                orientation:'vertical'
+                BoxLayout:
+                    size_hint:None,None
+                    width:388
+                    Image:
+                        source: 'resources/Logo.png'
+                Espaco:
+                MDLabel:
+                    text: ""
+                    id: msgError
+                    halign: "center"
+                    theme_text_color: "Error"       
+                Espaco:
+                CampoDeTexto:
+                    hint_text: "Full name"
+                    id:full_name
+                Espaco:    
+                CampoDeTexto:
+                    hint_text: "E-mail"
+                    id:email
+                Espaco:
+                CampoDeTexto:
+                    hint_text: "Password"
+                    password:True
+                    id:password
+                Espaco:
+                CampoDeTexto:
+                    hint_text: "Confirm Password"
+                    password:True
+                    id:confirm_password
+                Espaco:
+                Botao:
+                    text: "          Register          "         
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    on_press: root.register()
+
+<Botao@MDRectangleFlatButton>:
+    md_bg_color: Base_2
+    text_color: Base_1
+<CampoDeTexto@TextInput>:
+    size_hint:None,None
+    height:32
+    width:388
+    hint_text_color: Base_1
+    background_color: Base_3
+    foreground_color: Base_3
+    cursor_color: Base_1
+    multiline:False
+    canvas.before:
+        Color:
+            rgba: Base_1
+        Line:
+            width: 1
+            rectangle: self.x, self.y, self.width, self.height
+<Espaco@Label>:
+    size_hint: None, None
+    height: 30
+    width: 30
+
+    adaptive_size: True
+    md_bg_color:Base_1
+<ScrollChat@ScrollView>:
+    do_scroll_x: False
+    do_scroll_y: True
+    size_hint: None,None
+    height: 400
+    width: 500

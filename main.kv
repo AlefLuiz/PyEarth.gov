@@ -8,7 +8,8 @@
     TelaDeInicio:
     TelaDeLogin:
     TelaDeRegistro:
-    TelaDeRegDigital
+    TelaDeRegDigital:
+    TelaDePerfil:
 
 <TelaDeInicio>
     MDBoxLayout:
@@ -45,7 +46,11 @@
                     Espaco:
                     Botao:
                         text: "Reg Digital (Teste)"
-                        on_press:root.regfinger()           
+                        on_press:root.regfinger()
+                    Espaco:
+                    Botao:
+                        text: "Perfil (Teste)"
+                        on_press:root.profile()
 
 <TelaDeRegDigital>
     MDBoxLayout:
@@ -194,6 +199,22 @@
                     pos_hint: {"center_x": .5, "center_y": .5}
                     on_press: root.register()
 
+<TelaDePerfil>:
+    MDBoxLayout:
+        md_bg_color: Base
+        orientation:'vertical'
+        MDBoxLayout:
+            adaptive_height: True
+            md_bg_color: Base_2
+            Image:
+                source: 'resources/Logo.png'
+            Botao:
+                text: "+"
+                on_press:root.regfinger() 
+        AnchorLayout:
+            anchor_x:'right'
+            anchor_y:'top'
+
 <Botao@MDRectangleFlatButton>:
     md_bg_color: Base_2
     text_color: Base_1
@@ -219,9 +240,3 @@
 
     adaptive_size: True
     md_bg_color:Base_1
-<ScrollChat@ScrollView>:
-    do_scroll_x: False
-    do_scroll_y: True
-    size_hint: None,None
-    height: 400
-    width: 500

@@ -4,12 +4,8 @@ from kivy.core.window import Window
 from kivy.uix.label import Label
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivy.utils import get_color_from_hex as C
-import usuario
+from kivy.lang import Builder
 import utils
-import atexit
-import socket
-import threading
-import time
 
 Window.size = (800, 600)
 
@@ -27,9 +23,13 @@ class TelaDeInicio(Screen):
     def register(self):
         TelaPrincipal.switch_to(screens[2])
 
-    #Botão de teste, será retirado no programa final
+    #Botão de registro de digital, será retirado no programa final (apenas testes)
     def regfinger(self):
         TelaPrincipal.switch_to(screens[3])
+
+    #Botão de visualização do perfil, será retirado no programa final (apenas testes)
+    def profile(self):
+        TelaPrincipal.switch_to(screens[4])
 
 #Tela de registro - Cadastrar usuários
 class TelaDeRegistro(Screen):
@@ -82,6 +82,7 @@ class TelaDeLogin(Screen):
 
 #Tela de registro de digitais - Importar as digitais
 class TelaDeRegDigital(Screen):
+    
     def build(self):
         pass
 
@@ -89,17 +90,24 @@ class TelaDeRegDigital(Screen):
         ()
 
     def register_digital(self):
-            ()
+        ()
         
     def back(self):
-        TelaPrincipal.switch_to(screens[0])
+        TelaPrincipal.switch_to(screens[4])
+
+#Tela de registro de digitais - Importar as digitais
+class TelaDePerfil(Screen):
+    
+    def regfinger(self):
+        TelaPrincipal.switch_to(screens[3])
+    ()
 
 #Tela necessária para o funcionamento
 class MainApp(MDApp):
     def build(self):
         global screens, TelaPrincipal
         TelaPrincipal = ScreenManagement()
-        screens = [TelaDeInicio(name = 'TelaDeInicio'), TelaDeLogin(name='TelaDeLogin'),TelaDeRegistro(name='TelaDeRegistro'), TelaDeRegDigital(name='TelaDeRegDigital')]
+        screens = [TelaDeInicio(name = 'TelaDeInicio'), TelaDeLogin(name='TelaDeLogin'),TelaDeRegistro(name='TelaDeRegistro'), TelaDeRegDigital(name='TelaDeRegDigital'), TelaDePerfil(name='TelaDePerfil')]
         TelaPrincipal.switch_to(screens[0])
         return TelaPrincipal
 

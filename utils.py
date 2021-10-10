@@ -21,3 +21,4 @@ def validarSenha(passwd):
         return True
     else:
         return False
+        

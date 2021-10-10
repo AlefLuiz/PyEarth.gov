@@ -10,3 +10,4 @@ class Usuario:
     def setEmail(self, email): self.email = email
     def setSenha(self, senha): self.senha = senha
     def usuario(): pass
+    

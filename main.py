@@ -12,8 +12,7 @@ Window.size = (800, 600)
 class ScreenManagement(ScreenManager):
     pass
 
-#Tela principal - Possui os botões Login e Registrar
-class TelaDeInicio(Screen):
+class TelaDeInicio(Screen):     #Tela principal     - Possui os principais botões
     def build(self):
         pass
 
@@ -31,8 +30,7 @@ class TelaDeInicio(Screen):
     def profile(self):
         TelaPrincipal.switch_to(screens[4])
 
-#Tela de registro - Cadastrar usuários
-class TelaDeRegistro(Screen):
+class TelaDeRegistro(Screen):   #Tela de registro - Cadastrar usuários
     def build(self):
         pass
 
@@ -61,8 +59,7 @@ class TelaDeRegistro(Screen):
     def back(self):
         TelaPrincipal.switch_to(screens[0])
 
-#Tela de login - Logar no sistema
-class TelaDeLogin(Screen):
+class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
     def build(self):
         pass
 
@@ -80,8 +77,7 @@ class TelaDeLogin(Screen):
     def back(self):
         TelaPrincipal.switch_to(screens[0])
 
-#Tela de registro de digitais - Importar as digitais
-class TelaDeRegDigital(Screen):
+class TelaDeRegDigital(Screen): #Tela de importação das digitais - Importar as digitais
     
     def build(self):
         pass
@@ -95,14 +91,12 @@ class TelaDeRegDigital(Screen):
     def back(self):
         TelaPrincipal.switch_to(screens[4])
 
-#Tela de registro de digitais - Importar as digitais
-class TelaDePerfil(Screen):
+class TelaDePerfil(Screen):     #Tela de perfil     - Gerenciar as digitais
     
     def regfinger(self):
         TelaPrincipal.switch_to(screens[3])
     ()
 
-#Tela necessária para o funcionamento
 class MainApp(MDApp):
     def build(self):
         global screens, TelaPrincipal

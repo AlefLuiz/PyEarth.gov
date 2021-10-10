@@ -208,13 +208,52 @@
             md_bg_color: Base_2
             Image:
                 source: 'resources/Logo.png'
+                pos_hint: {"center_x": .0, "center_y": .5}
+            Label:
+                text: ' '
+            Label:
+                text: ' '
+            Label:
+                text: ' '
+            Label:
+                text: ' '
+            Label:
+                text: 'FULL NAME'
+            Label:
+                text: ' '
+            Label:
+                text: ' '
+            Label:
+                text: ' '
+            Label:
+                text: ' '
             Botao:
                 text: "+"
-                on_press:root.regfinger() 
+                on_press:root.regfinger()
         AnchorLayout:
-            anchor_x:'right'
-            anchor_y:'top'
+            anchor_x: 'right'
+            anchor_y: 'top'
+            ImagensDigital:
+                size_hint_y: None
+                adaptive_height: True
+                ScrollView:
+                    MDGridLayout:
+                        cols: 4
+                        adaptive_height: True
+                        padding: dp(4), dp(4)
+                        spacing: dp(4)
 
+                        ImagensDigital:
+                            source: "OpenCV/Database/01.jpg"
+                            text: "[size=14]Digital 1[/size]"
+                            adaptive_size: True
+                            adaptive_height: True
+                        ImagensDigital:
+                            source: "OpenCV/Database/02.jpg"
+                            text: "[size=14]Digital 2[/size]"
+                            adaptive_size: True
+                            adaptive_height: True
+                    
 <Botao@MDRectangleFlatButton>:
     md_bg_color: Base_2
     text_color: Base_1
@@ -240,3 +279,23 @@
 
     adaptive_size: True
     md_bg_color:Base_1
+
+<ImagensDigital@SmartTileWithLabel>
+    size_hint_y: None
+    height: "240dp"
+
+ScrollView:
+
+    MDGridLayout:
+        cols: 3
+        adaptive_height: True
+        padding: dp(4), dp(4)
+        spacing: dp(4)
+
+        ImagensDigital:
+            source: "OpenCV/Database/01.jpg"
+            text: "[size=26]Digital 1[/size]\n[size=14]01.jpg[/size]"
+
+        ImagensDigital:
+            source: "OpenCV/Database/02.jpg"
+            text: "[size=26]Digital 2[/size]\n[size=14]02.jpg[/size]"

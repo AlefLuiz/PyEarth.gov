@@ -3,9 +3,13 @@ from kivy.uix.screenmanager import NoTransition, ScreenManager, Screen
 from kivy.core.window import Window
 from kivy.uix.label import Label
 from kivymd.uix.boxlayout import MDBoxLayout
+from kivymd.uix.filemanager import MDFileManager
 from kivy.utils import get_color_from_hex as C
 from kivy.lang import Builder
+from kivymd.toast import toast
+import pathlib
 import utils
+import OpenCV.read as OpenCV
 
 Window.size = (800, 600)
 
@@ -63,11 +67,19 @@ class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
     def build(self):
         pass
 
+    def select_path(self, path):
+        self.file.exit_manager(self.file)
+        if OpenCV.APIDigital().ProcurarDigital(path):
+            TelaPrincipal.switch_to(screens[4])
+            toast('Bem Vindo!')
+
     def login(self):
         global cliente, User
         login = self.ids.login.text
         if utils.validarEmail(login):
-            password = self.ids.password.text
+            #password = self.ids.password.text
+            self.file = fileChoose
+            self.file.escolherArquivo(fileChoose,self.select_path)
         else:
             self.ids.msgError.text = "Login invalid!"
 
@@ -76,20 +88,25 @@ class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
 
     def back(self):
         TelaPrincipal.switch_to(screens[0])
+        
 
 class TelaDeRegDigital(Screen): #Tela de importação das digitais - Importar as digitais
-    
     def build(self):
         pass
-
-    def import_digital(self):
-        ()
 
     def register_digital(self):
         ()
         
     def back(self):
-        TelaPrincipal.switch_to(screens[4])
+        TelaPrincipal.switch_to(screens[2])
+
+    def select_path(self, path):
+        self.file.exit_manager(self.file)
+        self.ids.fingerprint.text = path
+
+    def import_digital(self):
+        self.file = fileChoose
+        self.file.escolherArquivo(fileChoose,self.select_path)
 
 class TelaDePerfil(Screen):     #Tela de perfil     - Gerenciar as digitais
     
@@ -105,4 +122,17 @@ class MainApp(MDApp):
         TelaPrincipal.switch_to(screens[0])
         return TelaPrincipal
 
+class fileChoose():
+    def escolherArquivo(self, selectpath):
+
+        path = str(pathlib.Path(__file__).parent.resolve())  # path to the directory that will be opened in the file manager
+        self.file_manager = MDFileManager(
+            exit_manager = self.exit_manager,  # function called when the user reaches directory tree root
+            select_path = selectpath,  # function called when selecting a file/directory
+        )
+        self.file_manager.show(path)
+
+    def exit_manager(self, *args):
+        self.manager_open = False
+        self.file_manager.close()
 MainApp().run()

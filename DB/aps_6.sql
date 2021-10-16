@@ -76,6 +76,35 @@ INSERT INTO `nivel_acesso` VALUES (1,'Todos'),(2,'Diretores'),(3,'Ministro'),(4,
 /*!40000 ALTER TABLE `nivel_acesso` ENABLE KEYS */;
 UNLOCK TABLES;
 
+---
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `nivel_acesso_id` int NOT NULL,
+  `ds_nome` varchar(200) NOT NULL,
+  `ds_email` varchar(80) NOT NULL,
+  `ds_senha` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `fk_usuarios_nivel_acesso_idx` (`nivel_acesso_id`),
+  CONSTRAINT `fk_usuarios_nivel_acesso` FOREIGN KEY (`nivel_acesso_id`) REFERENCES `mydb`.`nivel_acesso` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Dumping events for database 'aps_6'
 --

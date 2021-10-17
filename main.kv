@@ -142,11 +142,7 @@
                         pos_hint: {"center_x": .5, "center_y": .5}
                         Botao:
                             text: "Login"
-                            on_press:root.login()
-                        Espaco:
-                        Botao:
-                            text: "Register"
-                            on_press:root.register()             
+                            on_press:root.login()         
 
 <TelaDeRegistro>:
     MDBoxLayout:
@@ -193,6 +189,21 @@
                     hint_text: "Confirm Password"
                     password:True
                     id:confirm_password
+                Espaco:
+                MDBoxLayout:
+                    adaptive_size: True
+                    orientation:"horizontal"
+                    pos_hint: {"center_x": .5, "center_y": .5}
+                    Espaco:
+                    CampoDeTexto:
+                        id:fingerprint
+                        width:300
+                        hint_text: "Fingerprint"
+                    Espaco:
+                    Botao:
+                        text: "Import"         
+                        on_press: root.import_digital()
+                        pos_hint: {"center_y": .5}
                 Espaco:
                 Botao:
                     text: "          Register          "         

@@ -89,6 +89,7 @@ CREATE TABLE `usuarios` (
   `ds_nome` varchar(200) NOT NULL,
   `ds_email` varchar(80) NOT NULL,
   `ds_senha` varchar(45) NOT NULL,
+  `ds_digital` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `fk_usuarios_nivel_acesso_idx` (`nivel_acesso_id`),

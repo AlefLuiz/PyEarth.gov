@@ -9,6 +9,7 @@ class APIDigital():
     
 
     def ProcurarDigital(self, userFile):
+        digitais = []
         dim = (1000, 1200)
         # userFile = filedialog.askopenfilename()
         # -- Inicio do processamento da imagem -- #
@@ -24,6 +25,5 @@ class APIDigital():
                 baseImg = cv.resize(cv.Canny(cv.imread(f), 125, 175), dim)
                 bContours, bHierarchies = cv.findContours(baseImg, cv.RETR_LIST, cv.CHAIN_APPROX_SIMPLE)
                 if len(uContours) == len(bContours):
-                    #print('Bem vindo!')
-                    return True
-        return False
+                    digitais.append(f.split("\\")[-1])
+        return digitais

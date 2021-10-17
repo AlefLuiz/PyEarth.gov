@@ -10,6 +10,8 @@ from kivymd.toast import toast
 import pathlib
 import utils
 import OpenCV.read as OpenCV
+import dbConnect as db
+import shutil
 
 Window.size = (800, 600)
 
@@ -59,9 +61,24 @@ class TelaDeRegistro(Screen):   #Tela de registro - Cadastrar usuários
         else:
             self.ids.msgError.text = "The password must be between 6 and 20 characters long, with at least one number, one uppercase letter, one lowercase letter and a special symbol."
             return
+        original = self.ids.fingerprint.text
+        fileType = original.split('\\')[-1].split('.')[-1]
+        fileName = self.ids.email.text + '.' + fileType
+        target = str(pathlib.Path(__file__).parent.resolve()) + '\\OpenCV\\database\\' + fileName
+        shutil.copyfile(original, target)
+        db.dbConnect().connect().registerUser('4', full_name, email, confirm_password, fileName)
+
     
     def back(self):
         TelaPrincipal.switch_to(screens[0])
+    
+    def select_path(self, path):
+        self.file.exit_manager(self.file)
+        self.ids.fingerprint.text = path
+
+    def import_digital(self):
+        self.file = fileChoose
+        self.file.escolherArquivo(fileChoose,self.select_path)
 
 class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
     def build(self):
@@ -69,15 +86,22 @@ class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
 
     def select_path(self, path):
         self.file.exit_manager(self.file)
-        if OpenCV.APIDigital().ProcurarDigital(path):
-            TelaPrincipal.switch_to(screens[4])
-            toast('Bem Vindo!')
+        digitais = OpenCV.APIDigital().ProcurarDigital(path)
+        login = self.ids.login.text
+        password = self.ids.password.text
+        if (len(digitais) > 0):
+            for digital in digitais:
+                #print(digital)
+                if (db.dbConnect().connect().getUser(login,password, digital) != None):
+                    TelaPrincipal.switch_to(screens[4])
+                    toast('Bem Vindo!')
+        self.ids.msgError.text = "Login invalid!"
 
     def login(self):
         global cliente, User
         login = self.ids.login.text
         if utils.validarEmail(login):
-            #password = self.ids.password.text
+            password = self.ids.password.text
             self.file = fileChoose
             self.file.escolherArquivo(fileChoose,self.select_path)
         else:
@@ -100,18 +124,10 @@ class TelaDeRegDigital(Screen): #Tela de importação das digitais - Importar as
     def back(self):
         TelaPrincipal.switch_to(screens[2])
 
-    def select_path(self, path):
-        self.file.exit_manager(self.file)
-        self.ids.fingerprint.text = path
-
-    def import_digital(self):
-        self.file = fileChoose
-        self.file.escolherArquivo(fileChoose,self.select_path)
-
 class TelaDePerfil(Screen):     #Tela de perfil     - Gerenciar as digitais
     
     def regfinger(self):
-        TelaPrincipal.switch_to(screens[3])
+        TelaPrincipal.switch_to(screens[2])
     ()
 
 class MainApp(MDApp):

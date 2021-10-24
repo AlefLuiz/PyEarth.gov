@@ -35,3 +35,15 @@ class dbConnect():
     self.cursor.execute(query, (nivel_acesso, nome, email, senha, digital))
     self.cnx.commit()
     return user.Usuario(nivel_acesso, nome, email, senha, digital)
+
+  def getFocoQueimadas(self):
+    self.cursor = self.cnx.cursor()
+    query = ("SELECT datahora,satelite,municipio,risco_fogo FROM foco_queimadas LIMIT 30;")
+    self.cursor.execute(query)
+    datahoraF,sateliteF,municipioF,risco_fogoF = '', '', '', ''
+    for (datahora, satelite, municipio, risco_fogo) in self.cursor:
+      datahoraF = datahoraF + str(datahora) + '\n'
+      sateliteF = sateliteF + satelite + '\n'
+      municipioF = municipioF + municipio + '\n'
+      risco_fogoF = risco_fogoF + str(risco_fogo) + '\n'
+    return [datahoraF,sateliteF,municipioF,risco_fogoF]

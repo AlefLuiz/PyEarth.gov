@@ -28,18 +28,8 @@ class TelaDeInicio(Screen):     #Tela principal     - Possui os principais botõ
 
     def register(self):
         TelaPrincipal.switch_to(screens[2])
-
-    #Botão de registro de digital, será retirado no programa final (apenas testes)
-    def regfinger(self):
-        TelaPrincipal.switch_to(screens[3])
-
-    #Botão de visualização do perfil, será retirado no programa final (apenas testes)
-    def profile(self):
-        TelaPrincipal.switch_to(screens[4])
-        screens[4].build('TEste')
-        
-        
-
+             
+            
 class TelaDeRegistro(Screen):   #Tela de registro - Cadastrar usuários
     def build(self):
         pass
@@ -75,7 +65,7 @@ class TelaDeRegistro(Screen):   #Tela de registro - Cadastrar usuários
 
     
     def back(self):
-        TelaPrincipal.switch_to(screens[0])
+        TelaPrincipal.switch_to(screens[3])
     
     def select_path(self, path):
         self.file.exit_manager(self.file)
@@ -100,9 +90,9 @@ class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
                 #print(digital)
                 User = db.dbConnect().connect().getUser(login,password, digital)
                 if (User != None):
-                    TelaPrincipal.switch_to(screens[4])
+                    TelaPrincipal.switch_to(screens[3])
                     toast('Bem Vindo!')
-                    screens[4].build(User.getNome())
+                    screens[3].build(User.getNome())
         self.ids.msgError.text = "Login invalid!"
 
     def login(self):
@@ -119,17 +109,6 @@ class TelaDeLogin(Screen):      #Tela de login       - Logar no sistema
 
     def back(self):
         TelaPrincipal.switch_to(screens[0])
-        
-
-class TelaDeRegDigital(Screen): #Tela de importação das digitais - Importar as digitais
-    def build(self):
-        pass
-
-    def register_digital(self):
-        ()
-        
-    def back(self):
-        TelaPrincipal.switch_to(screens[2])
 
 class TelaDePerfil(Screen):     #Tela de perfil     - Gerenciar as digitais
     def build(self, username):
@@ -143,13 +122,12 @@ class TelaDePerfil(Screen):     #Tela de perfil     - Gerenciar as digitais
 
     def regfinger(self):
         TelaPrincipal.switch_to(screens[2])
-    ()
 
 class MainApp(MDApp):
     def build(self):
         global screens, TelaPrincipal
         TelaPrincipal = ScreenManagement()
-        screens = [TelaDeInicio(name = 'TelaDeInicio'), TelaDeLogin(name='TelaDeLogin'),TelaDeRegistro(name='TelaDeRegistro'), TelaDeRegDigital(name='TelaDeRegDigital'), TelaDePerfil(name='TelaDePerfil')]
+        screens = [TelaDeInicio(name = 'TelaDeInicio'), TelaDeLogin(name='TelaDeLogin'),TelaDeRegistro(name='TelaDeRegistro'), TelaDePerfil(name='TelaDePerfil')]
         TelaPrincipal.switch_to(screens[0])
         return TelaPrincipal
 

@@ -8,7 +8,6 @@
     TelaDeInicio:
     TelaDeLogin:
     TelaDeRegistro:
-    TelaDeRegDigital:
     TelaDePerfil:
 
 <TelaDeInicio>
@@ -39,67 +38,7 @@
                     Botao:
                         text: "Login"
                         on_press:root.login()
-                    #Espaco:
-                    #Botao:
-                    #    text: "Register"
-                    #    on_press:root.register()
-                    #Espaco:
-                    #Botao:
-                    #    text: "Reg Digital (Teste)"
-                    #    on_press:root.regfinger()
-                    #Espaco:
-                    #Botao:
-                    #    text: "Perfil (Teste)"
-                    #    on_press:root.profile()
 
-<TelaDeRegDigital>
-    MDBoxLayout:
-        md_bg_color: Base
-        orientation:'vertical'
-        AnchorLayout:
-            anchor_x:'left' 
-            anchor_y:'top'
-            Botao:
-                text: "<-"
-                on_press: root.back()
-            AnchorLayout:
-                anchor: 'center'
-                MDBoxLayout:
-                    adaptive_size: True
-                    orientation:"vertical"
-                    MDBoxLayout:
-                        adaptive_height: True
-                        Image:
-                            source: 'resources/Logo.png'
-                    Espaco:
-                    MDLabel:
-                        text: ""
-                        id: msgError
-                        halign: "center"
-                        theme_text_color: "Error"
-                    Espaco:
-                    CampoDeTexto:
-                        id:digital_name
-                        hint_text: "Digital Name"
-                    Espaco:
-                    CampoDeTexto:
-                        id:fingerprint
-                        hint_text: "Fingerprint"
-                    Espaco:
-                    MDBoxLayout:
-                        adaptive_size: True
-                        orientation:"horizontal"
-                        pos_hint: {"center_x": .5, "center_y": .5}
-                        Espaco:
-                        Botao:
-                            text: "Import"         
-                            on_press: root.import_digital()
-                            pos_hint: {"center_y": .5}
-                        Espaco:
-                        Botao:
-                            text: "Register"         
-                            on_press: root.register_digital()
-                            pos_hint: {"center_y": .5}  
 
 <TelaDeLogin>:
     MDBoxLayout:
